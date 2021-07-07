@@ -1,0 +1,69 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+
+<!-- Main content -->
+<div style="margin: 10px;">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fa fa-gear"></i> </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">   </span>
+                            <a href="/panel/profile/"> تنظیمات</a>
+                            <span class="info-box-number">
+                            <small> پروفایل  </small>
+                            </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success elevation-1"><i class="nav-icon fa fa-envelope-o"></i> </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">   </span>
+                            <a href="/panel/emails/"> ایمیل های دریافتی</a>
+                            <span class="info-box-number">
+                    
+                            <small> خبرنامه  </small>
+                            </span>
+
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                </div>
+
+                <div style="width: 800px;" class="col-md-6">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-bullhorn"></i> نظرات
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            {% for i in comment %}
+                            <div class="callout callout-danger">
+                                <h6> <a href="{% url 'reply' pk=i.pk %}" data-toggle="tooltip" title="answer" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a> {{i.pname}} در تاریخ {{i.date}} | {{i.time}}</h6>
+                                <p style=" white-space: nowrap;width: 400px; overflow: hidden; text-overflow: ellipsis; ">{{i.text}} </p>
+                                <hr>
+                            </div>
+                            {%endfor%}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<!-- /.content -->
+
+
+<!-- /.card -->
+{{rand}} {% endblock%}

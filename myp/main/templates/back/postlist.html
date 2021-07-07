@@ -1,0 +1,74 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+
+<div class="row" style="width: 950px; margin: 40px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"> {{cats.pk}}جدول {{cats.name}} </h3>
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <tr>
+                        <th>id </th>
+                        <th>نویسنده </th>
+                        <th>تاریخ</th>
+                        <th>بازدید</th>
+                        <th>دسته بندی </th>
+                        <th>عنوان</th>
+                        <th>عکس</th>
+                        <th>تغییر </th>
+                    </tr>
+                    {% for i in doc1 %} {% if i.catname == cats.name %}
+                    <tr>
+                        <td>{{i.pk}}</td>
+                        <td>{{i.writer}}</td>
+                        <td>{{i.date}} | {{i.time}}</td>
+                        <td> {{i.show}}</td>
+                        <td><span class="badge badge-success"> {{i.catname}}</span></td>
+                        <td> {{i.title}}</td>
+                        <td> <img src="{{i.picurl}}" style="width: 50px; height: 40px;"> </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{% url 'editnews' pk=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'deletenews' pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %} {%endfor%}
+                </table>
+
+
+                <hr>
+                <div style="margin-right: 10px; margin-left: 370px;float: left; ">
+                    صفحه {{news.number}} از {{news.paginator.num_pages}}
+                </div>
+
+                <div style="margin-right: 380px;">
+                    {% if news.has_previous %}
+                    <a href="?page={{news.previous_page_number}}" title="previous">&laquo;</a> {%endif %} {% for i in news.paginator.page_range %} {% if news.number == i %}
+                    <a href="#" title="{{Disables}}">{{i}}</a> {%else%}
+                    <a href="?page={{i}}" title="{{i}}">{{i}}</a> {%endif%} {%endfor%} {% if news.has_next %}
+                    <a href="?page={{news.next_page_number}}" title="next">&raquo;</a> {%endif%}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+</div>
+
+{%endblock%}

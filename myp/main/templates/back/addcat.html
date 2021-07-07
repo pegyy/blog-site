@@ -1,0 +1,22 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+
+
+
+<form action="{% url 'addcat'%} " method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card card-outline card-info" style="width: 950px; padding: 20px; margin: 40px;">
+
+        <div class="form-group" style="width:400px ; margin-right: 40px;">
+            <label> دسته بندی جدید  </label>
+            <input id="name" name="name" type="text" class="form-control" placeholder="نام دسته   ">
+        </div>
+
+        <button style="width: 200px; margin-right: 45px;" type="submit" class="btn btn-info"> ثبت  </button>
+
+    </div>
+
+</form>
+
+
+{% endblock%}

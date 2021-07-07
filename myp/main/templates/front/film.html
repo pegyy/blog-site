@@ -1,0 +1,128 @@
+{%extends 'front/master.html'%} {% load static %} {% load qr_code %} {%block mainblock%}
+
+<section id="mainContent">
+    <div class="content_middle">
+        <!-- Category 1-->
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="content_middle_leftbar">
+                <div class="single_category wow fadeInDown">
+                    <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="archive1.html" class="title_text">جدید ترین</a> </h2>
+                    <ul class="catg1_nav">
+                        {% for i in last %} {% if i.catid == 1%}
+                        <li>
+                            <div class="catgimg_container">
+                                <a href="{% url 'post' word=i.title %}" class="catg1_img"> <img alt="{{i.title}}" src="{{i.picurl}}"> </a>
+                            </div>
+                            <h3 class="post_titile"><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h3>
+                        </li>
+                        {% endif %} {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Category 1-->
+        <!-- slider -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="content_middle_middle">
+                <div class="slick_slider2">
+                    {% for i in news %} {% if i.catid == 1 %}
+                    <div class="single_featured_slide">
+                        <a href="{% url 'post' word=i.title %}"><img src="{{i.picurl}}" alt="{{i.title}}"></a>
+                        <h2><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                        <p>{{i.short_txt | safe}}</p>
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!--End slider -->
+
+        <!-- Category 2 -->
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="content_middle_leftbar">
+                <div class="single_category wow fadeInDown">
+                    <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="archive1.html" class="title_text">پربازدید ترین </a> </h2>
+                    <ul class="catg1_nav">
+                        {% for i in view %} {% if i.catid == 1%}
+                        <li>
+                            <div class="catgimg_container">
+                                <a href="{% url 'post' word=i.title %}" class="catg1_img"> <img alt="{{i.title}}" src="{{i.picurl}}"> </a>
+                            </div>
+                            <h3 class="post_titile"><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h3>
+                        </li>
+                        {% endif %} {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--End Category 2-->
+
+    </div>
+    <div class="content_bottom">
+        <div class="col-lg-8 col-md-8">
+            <div class="content_bottom_left">
+                <div class="single_category wow fadeInDown">
+                    <div class="archive_style_1">
+                        <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text">Latest Updates</span> </h2>
+                        {% for i in news %} {% if i.catid == 1 %}
+                        <div class="single_archive wow fadeInDown">
+                            <div class="archive_imgcontainer"><img src="{{i.picurl}}" alt="{{i.title}}"> </div>
+                            <div class="archive_caption">
+                                <h2><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                                <p style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis;width: 100px;">{{i.short_txt | safe}}</p>
+                            </div>
+                            <a class="read_more" href="{% url 'post' word=i.title %}"><span>بیشتر </span></a> </div>
+                        {% endif %} {%endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="pagination_area">
+                <nav>
+                    <ul class="pagination">
+                        <div style="margin-right: 380px;">
+                            {% if news.has_previous %}
+                            <li><a href="?page={{news.previous_page_number}}" title="previous"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
+                            {%endif %} {% for i in news.paginator.page_range %} {% if news.number == i %}
+                            <li><a href="#" title="{{Disables}}">{{1}}</a></li>
+                            {%else%}
+                            <li><a href="?page={{i}}" title="{{i}}">{{i}}</a></li>
+                            {%endif%} {%endfor%} {% if news.has_next %}
+                            <li><a href="?page={{news.next_page_number}}" title="next"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
+                            {%endif%}
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="content_bottom_right">
+                <div class="content_bottom_right">
+                    <div class="content_bottom_right">
+                        <div class="single_bottom_rightbar">
+                            <h2> مطالب دیگر</h2>
+                            <ul class="small_catg popular_catg wow fadeInDown">
+                                {% for i in other %}
+                                <li>
+                                    <div class="media wow fadeInDown">
+                                        <a href="#" class="media-left"><img alt="" src="{{i.picurl}}"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="{% url 'post' word=i.title %}">{{i.title}} </a></h4>
+                                            <div style="font-size: xx-small;">
+                                                {{i.short_txt | safe}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor%}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+{% endblock%}

@@ -1,0 +1,168 @@
+ {%extends 'front/master.html'%} {% load static %} {% load qr_code %} {%block mainblock%}
+<section id="mainContent">
+    <div class="content_top">
+        <div class="row">
+            <!-- Slide show -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="latest_slider">
+                    <div class="slick_slider">
+                        {% for i in last %} {% if i.catid == 1 %}
+                        <div class="single_iteam"><img src="{{i.picurl}}" style="height: 425px;" alt="">
+                            <h2><a class="slider_tittle" href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                        </div>
+                        {%endif%} {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- End slide show -->
+            <!-- most view -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="content_top_right">
+                    <ul class="featured_nav wow fadeInDown">
+                        {% for k in last %} {% if k.catid == 1 %}
+                        <li><img src="{{k.picurl}}" alt="">
+                            <div class="title_caption"><a href="{% url 'post' word=k.title %}">{{k.title}} </a></div>
+                        </li>
+                        {%endif%} {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            <!-- End most view -->
+        </div>
+    </div>
+    <div class="content_middle">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="content_middle_leftbar">
+                <!-- news -->
+                <div class="single_category wow fadeInDown">
+                    <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text">اخبار</a> </h2>
+                    <ul class="catg1_nav">
+                        {% for i in last2 %} {% if i.catid == 4 %}
+                        <li>
+                            <div class="catgimg_container">
+                                <a href="{% url 'post' word=i.title %}" class="catg1_img"><img alt="{{i.title}}" src="{{i.picurl}}"></a>
+                            </div>
+                            <h3 class="post_titile"><a href="{% url 'post' word=i.title %}">{{i.title}} </a></h3>
+                        </li>
+                        {%endif%} {%endfor %}
+                    </ul>
+                </div>
+                <!-- news -->
+
+            </div>
+        </div>
+        <!-- last music -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="content_middle_middle">
+                <div class="slick_slider2">
+                    {% for i in last %} {% if i.catid == 2 %}
+                    <div class="single_featured_slide">
+                        <a href="pages/single.html"><img src="{{i.picurl}}" alt="{{i.title}}"></a>
+                        <h2><a href="{% url 'post' word=i.title %}"> {{i.title}}</a></h2>
+                        <p style="overflow: hidden; text-overflow: ellipsis;white-space: nowrap;width: 30px;"> {{i.short_txt | safe}}</p>
+                    </div>
+                    {%endif%} {%endfor%}
+                </div>
+            </div>
+        </div>
+        <!-- end last music -->
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <!-- mosaheb-->
+            <div class="content_middle_rightbar">
+                <div class="single_category wow fadeInDown">
+                    <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <a href="#" class="title_text">مصاحبه</a> </h2>
+                    <ul class="catg1_nav">
+                        {% for i in last2 %} {% if i.catid == 3 %}
+                        <li>
+                            <div class="catgimg_container">
+                                <a href="pages/single.html" class="catg1_img"><img alt="{{i.title}}" src="{{i.picurl}}"></a>
+                            </div>
+                            <h3 class="post_titile"><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h3>
+                        </li>
+                        {%endif%} {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_bottom">
+        <div class="col-lg-8 col-md-8">
+            <div class="content_bottom_left">
+                <div class="single_category wow fadeInDown">
+                    <div class="archive_style_1">
+                        <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text"> آخرین مطالب </span> </h2>
+                        {% for i in news %}
+                        <div class="single_archive wow fadeInDown">
+                            <div class="archive_imgcontainer"><img src="{{i.picurl}}" alt="{{i.title}}"> </div>
+                            <div class="archive_caption">
+                                <h2 style=" text-align: right;"><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                                <div style="font-size: small; font-family: Dirooz;  text-align: right;">
+                                    {{i.short_txt | safe}}
+                                </div>
+                            </div>
+
+                            <a class="read_more" href="{% url 'post' word=i.title %}"><span>بیشتر </span></a> </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- right sidbar -->
+        <div class="col-lg-4 col-md-4">
+
+            <div class="single_bottom_rightbar wow fadeInDown">
+                <div class="single_bottom_rightbar">
+                    <h2> شبکه اجتماعی </h2>
+                </div>
+            </div>
+            <div class="single_footer_top wow fadeInRight">
+                <ul>
+                    <li style="font-size: large;"><i style="color: maroon;" class="fa fa-instagram fa-2x" aria-hidden="true"></i><a style="color:#F2950A;" href="{{setting.insta}}">  Instagram</a>
+                    </li>
+                    <br>
+                    <li style="font-size: large;"><i style="color: dodgerblue;" class="fa fa-paper-plane fa-2x" aria-hidden="true"></i> <a style="color: #F2950A;" href="{{setting.tlg}}">  Telegram</a></li>
+                </ul>
+            </div>
+            <div class="single_bottom_rightbar">
+                <h2>عضویت در خبرنامه</h2>
+                <div class="blog_archive wow fadeInDown">
+                    <form action="{% url 'getemail' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input id="newsletters" name="newsletters" class="form-control" type="text" placeholder="ایمیل خود را وارد کنید " />
+                        </div>
+                        <div class="form-group">
+                            <button style=" width: 100% ;border-radius: 5px; border-color:darkorange; font-size: large; background-color: darkorange;"> <p style="color: floralwhite;"> ارسال</p></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="content_bottom_right">
+                <div class="single_bottom_rightbar">
+                    <h2> مطالب دیگر</h2>
+                    <ul class="small_catg popular_catg wow fadeInDown">
+                        {% for i in other %}
+                        <li>
+                            <div class="media wow fadeInDown">
+                                <a href="#" class="media-left"><img alt="" src="{{i.picurl}}"> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading" style=" text-align: right;"><a href="{% url 'post' word=i.title %}">{{i.title}} </a></h4>
+                                    <div style="font-size: xx-small; font-family: Dirooz;  text-align: right;">
+                                        {{i.short_txt | safe}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor%}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- end right sidbar -->
+
+    </div>
+    </div>
+</section>
+</div>
+{% endblock%}

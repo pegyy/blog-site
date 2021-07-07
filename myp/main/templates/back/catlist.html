@@ -1,0 +1,67 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+<form action="{% url 'addcat'%} " method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card card-outline card-info" style="width: 950px; padding: 20px; margin: 40px;">
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group" style="width:400px ; margin-right: 40px;">
+                        <label> دسته بندی جدید  </label>
+                        <input id="name" name="name" type="text" class="form-control" placeholder="نام دسته   ">
+                    </div>
+                </td>
+                <td>
+                    <button style="width: 200px; margin-right: 45px;margin-top: 10px;" type="submit" class="btn btn-info"> ثبت  </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</form>
+<div class="row" style="width: 950px; margin: 40px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">جدول دسته بندی ها </h3>
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <tr>
+                        <th>id</th>
+                        <th>نام </th>
+                        <th>تاریخ</th>
+                        <th>تغییر </th>
+                    </tr>
+                    {% for i in cat %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.date_cat}} | {{i.time_cat}}</td>
+                        <th>
+                            <div class="btn-group">
+                                <a href="{% url 'editcat'  pk=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'deletecat'  pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </th>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.card-body -->
+
+{% endblock%}

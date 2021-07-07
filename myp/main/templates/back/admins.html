@@ -1,0 +1,53 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+
+<div style="margin: 10px;" class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <table>
+                    <tr>
+                        <th>
+                            <i style="margin-left: 10px;" class="fa fa-users" aria-hidden="true"></i>
+                        </th>
+                        <th>
+                            <label>ادمین ها    </label>
+                        </th>
+
+                    </tr>
+                </table>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <tr>
+                        <th>id</th>
+                        <th>نام </th>
+                        <th>ایمیل </th>
+                        <th>زمان آخرین لاگین </th>
+                        <th>ip </th>
+                        <th>حذف </th>
+                    </tr>
+                    {% for i in admin %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.pip}}</td>
+                        <td>{{i.address}}</td>
+                        <th>
+                            <div class="btn-group">
+                                <a href="{% url 'delmember'  pk=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </th>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.card-body -->
+
+{% endblock%}

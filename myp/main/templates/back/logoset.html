@@ -1,0 +1,45 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+<div class="card card-outline card-info" style="width:960px; padding: 10px; margin: 10px;">
+    <table>
+        <tr>
+            <th>
+                <a style="width: 40px; margin-left:10px;" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+            </th>
+            <th>
+                <label>   تنظیمات  سایت | لوگو </label>
+            </th>
+        </tr>
+    </table>
+</div>
+<form action="{% url 'logoset'%} " method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    <div class="card card-outline card-info" style="width: 960px; padding: 10px; margin: 10px;">
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group" style="width: 300px;margin-right: 30px;">
+                        <label for="exampleInputFile">انتخاب لوگو  </label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="myfile" class="custom-file-input" id="myfile">
+                                <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="">Upload</span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <img style="width: 50% ; height: 50%;margin-right: 60px;" src="{{setting.logourl}}">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card card-outline card-info" style="width: 960px; padding: 10px; margin: 10px;">
+        <button style="width: 100px; margin-right: 450px;" type="submit" class="btn btn-info">ارسال </button>
+    </div>
+</form>
+{% endblock%}

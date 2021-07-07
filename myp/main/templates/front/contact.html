@@ -1,0 +1,60 @@
+{%extends 'front/master.html'%} {% load static %} {% load qr_code %} {%block mainblock%}
+
+
+<section id="mainContent">
+    <div class="content_top">
+        <div class="row">
+            <!-- Slide show -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="latest_slider">
+                    <div class="slick_slider">
+                        {% for i in last %} {% if i.catid == 1 %}
+                        <div class="single_iteam"><img src="{{i.picurl}}" alt="">
+                            <h2><a class="slider_tittle" href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                        </div>
+                        {%endif%} {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- most view -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="content_top_right">
+                    <ul class="featured_nav wow fadeInDown">
+                        {% for k in last %} {% if k.catid == 1 %}
+                        <li><img src="{{k.picurl}}" alt="">
+                            <div class="title_caption"><a href="pages/single.html">{{k.title}} </a></div>
+                        </li>
+                        {%endif%} {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            <!-- End most view -->
+
+        </div>
+    </div>
+    <section id="ContactContent">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="contact_area">
+                    <h1>Contacts</h1>
+                    <p> {{setting.contact_txt | safe }}</p>
+                    <div class="contact_bottom">
+                        <div class="contact_us wow fadeInRightBig">
+                            <h2>Contact Us</h2>
+                            <form action="{% url 'contact' %}" method="POST" class="contact_form">
+                                {% csrf_token %}
+                                <input class="form-control" type="text" id="namecu" name="namecu" placeholder="Name(required)">
+                                <input class="form-control" type="email" id="emailcu" name="emailcu" placeholder="E-mail(required)">
+                                <textarea class="form-control" cols="30" rows="10" id="textcu" name="textcu" placeholder="Message(required)"></textarea>
+                                <input type="submit" value="Send">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+</section>
+{% endblock%}

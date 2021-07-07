@@ -1,0 +1,26 @@
+{%extends 'back/master.html'%} {% load static %} {%block mainblock%}
+
+<!-- Default box -->
+<div class="card" style="width: 900px; margin: 40px;">
+    <div class="card-header">
+        <h3 class="card-title">خطا ! </h3>
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        {{error}}
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        سپاس
+    </div>
+    <!-- /.card-footer-->
+
+
+
+    {% endblock%}

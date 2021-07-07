@@ -1,0 +1,61 @@
+{%extends 'back/master.html'%} {% load static %} {% block headblock%}
+<script src="{% static 'ckeditor/ckeditor.js' %}">
+</script>
+{% endblock %} {%block mainblock%}
+
+<form action="{% url 'mysetting'%} " method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card card-outline card-info">
+        <table>
+            <tr>
+                <th>
+                    <div class="form-group">
+                        <label>عنوان سایت  </label>
+                        <input id="sitename" name="sitename" type="text" class="form-control" value="{{setting.sitename}}">
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group" style="width:400px ; margin-right: 40px;">
+                        <label> لینک اینستاگرام   </label>
+                        <input id="insta" name="insta" type="text" class="form-control" value="{{setting.insta}}">
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="form-group" style="width:400px ; margin-right: 40px;">
+                        <label>ایمیل </label>
+                        <input id="email" name="email" type="text" class="form-control" value="{{setting.email}}">
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group" style="width:400px ; margin-right: 40px;">
+                        <label> تلگرام   </label>
+                        <input id="tlg" name="tlg" type="text" class="form-control" value="{{setting.tlg}}">
+                    </div>
+                </th>
+            </tr>
+        </table>
+        <div class="form-group" style="width:840px ; margin-right: 40px;">
+            <label> آدرس   </label>
+            <input id="address" name="address" type="text" class="form-control" value="{{setting.address}}">
+        </div>
+    </div>
+    <div class="card card-outline card-info" style="width: 950px; padding: 20px; margin: 40px;">
+        <div class="card-header">
+            <h3 class="card-title">
+                متن تماس با ما
+            </h3>
+        </div>
+        <hr style="color: rgb(116, 105, 105) solid ;">
+        <textarea id="contact_txt" name="contact_txt" placeholder="لطفا متن خود را وارد کنید" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+        <script>
+            CKEDITOR.replace('contact_txt');
+        </script>
+    </div>
+
+    <div class="card card-outline card-info" style="width: 950px; padding: 20px; margin: 40px;">
+        <button style="width: 800px; margin-right: 50px;" type="submit" class="btn btn-info">ارسال </button>
+    </div>
+</form>
+{% endblock%}

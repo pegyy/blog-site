@@ -1,0 +1,85 @@
+{%extends 'front/master.html'%} {% load static %} {% load qr_code %} {%block mainblock%}
+
+
+<section id="mainContent">
+    <div class="content_top">
+        <div class="row">
+            <!-- Slide show -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="latest_slider">
+                    <div class="slick_slider">
+                        {% for i in last %} {% if i.catid == 1 %}
+                        <div class="single_iteam"><img src="{{i.picurl}}" alt="">
+                            <h2><a class="slider_tittle" href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                        </div>
+                        {%endif%} {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- most view -->
+            <div class="col-lg-6 col-md-6 col-sm6">
+                <div class="content_top_right">
+                    <ul class="featured_nav wow fadeInDown">
+                        {% for k in last %} {% if k.catid == 1 %}
+                        <li><img src="{{k.picurl}}" alt="">
+                            <div class="title_caption"><a href="pages/single.html">{{k.title}} </a></div>
+                        </li>
+                        {%endif%} {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            <!-- End most view -->
+        </div>
+    </div>
+    <div class="content_bottom">
+        <div class="col-lg-8 col-md-8">
+            <div class="content_bottom_left">
+                <div class="single_category wow fadeInDown">
+                    <div class="archive_style_1">
+                        <h2> <span class="bold_line"><span></span></span> <span class="solid_line"></span> <span class="title_text">نتایج جستجو</span> </h2>
+                        {% for i in alls %}
+                        <div class="single_archive wow fadeInDown">
+                            <div class="archive_imgcontainer"><img src="{{i.picurl}}" alt="{{i.title}}"> </div>
+                            <div class="archive_caption">
+                                <h2><a href="{% url 'post' word=i.title %}">{{i.title}}</a></h2>
+                                <p style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis;width: 100px;">{{i.short_txt | safe}}</p>
+                            </div>
+                            <a class="read_more" href="{% url 'post' word=i.title %}"><span>بیشتر </span></a> </div>
+                        {%endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="content_bottom_right">
+                <div class="content_bottom_right">
+                    <div class="content_bottom_right">
+                        <div class="single_bottom_rightbar">
+                            <h2> مطالب دیگر</h2>
+                            <ul class="small_catg popular_catg wow fadeInDown">
+                                {% for i in other %}
+                                <li>
+                                    <div class="media wow fadeInDown">
+                                        <a href="#" class="media-left"><img alt="" src="{{i.picurl}}"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="{% url 'post' word=i.title %}">{{i.title}} </a></h4>
+                                            <div style="font-size: xx-small;">
+                                                {{i.short_txt | safe}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor%}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+
+{% endblock%}

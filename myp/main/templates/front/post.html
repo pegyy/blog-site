@@ -1,0 +1,121 @@
+{%extends 'front/master.html'%} {% load static %} {%block mainblock %}
+
+<section id="mainContent">
+    <div class="content_bottom">
+        <div class="col-lg-8 col-md-8">
+            <div class="content_bottom_right">
+                <div class="single_page_area">
+                    <ul class="breadcrumb">
+                        <li><a href="#">خانه</a></li>
+                        <li><a href="#">{{news.catname}}</a></li>
+                        <li class="active">{{news.title}} </li>
+                    </ul>
+                    <h2 class="post_titile">{{news.title}} </h2>
+                    <div class="single_page_content">
+                        <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Wpfreeware</a> <span><i class="fa fa-calendar"></i>{{news.time}} | {{news.date}}</span> <span><i class="fa fa-eye"></i>{{news.show}}</span> <a href="#"><i class="fa fa-tags"></i>{{news.catname}}</a></div>
+                        <img class="img-center" src="{{news.picurl}}" alt="">
+                        <p> {{news.short_txt | safe }}</p>
+
+
+                        <p>{{news.text | safe}}</p>
+
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="post_pagination">
+                <div class="prev"> <a class="angle_left" href="#"><i class="fa fa-angle-double-left"></i></a>
+                    <div class="pagincontent"> <a href="?page={{news.previous_page_number}}" title="previous">previous 
+                    </a> <a href="#">{{i.title}} </a> </div>
+                </div>
+
+                <div class="next">
+                    <div class="pagincontent"> <span>Next Post</span> <a href="#">{{i.title}}</a> </div>
+                    <a class="angle_right" href="#"><i class="fa fa-angle-double-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="contact_bottom">
+                <h2> منتظر نظرات شما هستیم <i class="fa fa-thumbs-o-up"></i></h2>
+                <form action="{% url 'addcomment' pk=news.pk %}" method="POST" class="contact_form">
+                    {% csrf_token %}
+                    <input class="form-control" type="text" id="pname" name="pname" placeholder="Name(required)">
+                    <input class="form-control" type="email" id="pemail" name="pemail" placeholder="E-mail(required)">
+                    <textarea class="form-control" cols="30" rows="10" id="comment_txt" name="comment_txt" placeholder="Message(required)"></textarea>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+        <!-- right sidbar -->
+        <div class="col-lg-4 col-md-4">
+            <div class="content_bottom_right">
+                <div class="single_bottom_rightbar">
+                    <h2> مطالب دیگر</h2>
+                    <ul class="small_catg popular_catg wow fadeInDown">
+                        {% for i in other %}
+                        <li>
+                            <div class="media wow fadeInDown">
+                                <a href="#" class="media-left"><img alt="" src="{{i.picurl}}"> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="{% url 'post' word=i.title %}">{{i.title}} </a></h4>
+                                    <div style="font-size: xx-small;">
+                                        {{i.short_txt | safe}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor%}
+                    </ul>
+                </div>
+            </div>
+            <div class="single_bottom_rightbar wow fadeInDown">
+                <h2> شبکه اجتماعی </h2>
+                <ul>
+                    <li style="font-size: large;"><i style="color: maroon;" class="fa fa-instagram fa-2x" aria-hidden="true"></i><a style="color:#F2950A;" href="{{setting.insta}}">  Instagram</a>
+                    </li>
+                    <br>
+                    <li style="font-size: large;"><i style="color: dodgerblue;" class="fa fa-paper-plane fa-2x" aria-hidden="true"></i> <a style="color: #F2950A;" href="{{setting.tlg}}">  Telegram</a></li>
+                </ul>
+            </div>
+            <div class="single_bottom_rightbar">
+                <h2>عضویت در خبرنامه</h2>
+                <div class="blog_archive wow fadeInDown">
+                    <div class="form-group">
+                        <input id="mail" name="mail" class="form-control" type="text" placeholder="ایمیل خود را وارد کنید " />
+                    </div>
+                    <div class="form-group">
+                        <button style=" width: 100% ;border-radius: 5px; border-color:darkorange; font-size: large; background-color: darkorange;"> <p style="color: floralwhite;"> ارسال</p></button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="single_bottom_rightbar">
+                <div class="single_bottom_rightbar">
+                    <h2> کامنت ها</h2>
+                    {% for i in comment %}
+                    <ul class="small_catg popular_catg wow fadeInDown">
+                        <li>
+                            <div class="media wow fadeInDown">
+                                <div class="media-body">
+                                    <h4 style="float: right;" class="media-heading"> {{i.pname}}</h4>
+                                    <br>
+                                    <div style="font-size: xx-small;width: 350px; border-radius: 5px; border: 1px solid #F2950A;">
+                                        <p style="margin: 5px;">
+                                            {{i.comment_txt | safe}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+        <!-- end right sidbar -->
+    </div>
+</section>
+</div>
+
+{% endblock%}
